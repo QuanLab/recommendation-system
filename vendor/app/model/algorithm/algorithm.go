@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"encoding/json"
 	"log"
-	"fmt"
 )
 
 const (
@@ -16,27 +15,29 @@ const (
 	INTERESTING_FACTOR = 0.4
 )
 
-func GetRecommendNews(domain string, boxid int, guid string, itemid int64) string {
-	responseData := response.ResponseData{Algorithm: 1}
-	fmt.Println(domain, boxid, guid, itemid)
+//get recommend news
+func GetRecommendNews(domain string, boxid int, guid string, itemid string) string {
+	responseData := response.ResponseData{Algorithm: 23}
 	guiId, err := strconv.ParseInt(guid, 10, 64)
 	if err != nil {
-		log.Println(err)
-		return "{}"
+		guiId = 0
 	}
-
 	arrNews, err := news.GetNewsSimilarity(itemid)
 	if err != nil {
-		log.Println(err)
+		arrNews, _ = news.GetLastPost(itemid);
+	}
+
+	if len(arrNews) == 0 {
+		arrNews, _ = news.GetLastPost("0");
 	}
 
 	trendingNews, err := news.GetTrendingNews()
 	if err != nil {
 		log.Println(err)
 	}
-
 	mapUserNewsInterest := make(map[int64]float64, 0)
 	recommends := make([]response.Post, 0)
+
 	for _, news := range arrNews {
 		mapUserNewsInterest[news.CatId] = 0
 	}
@@ -59,7 +60,6 @@ func GetRecommendNews(domain string, boxid int, guid string, itemid int64) strin
 		}
 		userNewsInterest := (news.GetProbCatIdEqualCi(catId) * dividend) / float64(totalClick)
 		mapUserNewsInterest[catId] = userNewsInterest
-		log.Println(catId, userNewsInterest)
 		dividend = 10;
 		totalClick = 10
 	}
@@ -80,16 +80,15 @@ func GetRecommendNews(domain string, boxid int, guid string, itemid int64) strin
 
 	arrNews = rankingScore(arrNews)
 	for _, news := range arrNews {
-		log.Println(news.NewsId, news.CatId, news.SimilarityScore)
 		recommends = append(recommends, response.Post{ID: news.NewsId})
 	}
 
-	fmt.Println(recommends)
 	responseData.Recommends = recommends
 	jsonsbytes, _ := json.Marshal(responseData)
 	return string(jsonsbytes)
 }
 
+//ranks items by score
 func rankingScore(items []news.News) []news.News {
 	var n = len(items)
 	for i := 0; i < n; i++ {

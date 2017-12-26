@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 VERSION=$(date +"%y.%m.%d")-dev
+VERSION=1.0.0
 WORKING_DIR=$(pwd)
-DOCKER_IMAGE=go-recommend
+DOCKER_IMAGE=go-recommender
 
 echo 'compile application...'
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .

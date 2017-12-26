@@ -6,5 +6,5 @@ type ResponseData struct {
 }
 
 type Post struct {
-	ID int64 `json:"id,omitempty"`
+	ID string `json:"id,omitempty"`
 }

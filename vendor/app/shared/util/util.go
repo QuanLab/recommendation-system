@@ -1,20 +1,9 @@
 package util
 
 import (
-	"sync"
 	"time"
 	"fmt"
 )
-
-//return length of sync map
-func len(m sync.Map) int {
-	len := 0
-	m.Range(func(_, _ interface{}) bool {
-		len++
-		return true
-	})
-	return len
-}
 
 //return list yyyy_MM from current to prvious
 //@param n number of month in list

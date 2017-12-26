@@ -24,6 +24,13 @@ func init() {
 	go func() {
 		for {
 			news.LoadNewsSimilarityToCache()
+			time.Sleep(time.Duration(1) * time.Minute)
+		}
+	}()
+
+	go func() {
+		for {
+			news.LoadTrendingNews()
 			time.Sleep(time.Duration(5) * time.Minute)
 		}
 	}()
@@ -31,14 +38,14 @@ func init() {
 	go func() {
 		for {
 			news.LoadProbabilityCategoryEqualCi()
-			time.Sleep(time.Duration(10) * time.Minute)
+			time.Sleep(time.Duration(15) * time.Minute)
 		}
 	}()
 
 	go func() {
 		for {
 			user.LoadUserProfileToCache()
-			time.Sleep(time.Duration(10) * time.Minute)
+			time.Sleep(time.Duration(5) * time.Minute)
 		}
 	}()
 }

@@ -1,25 +1,25 @@
 {
-	"MySQL": {
-			"Username": "quanpv",
-			"Password": "admin@123",
-			"Name": "recommender",
-			"Hostname": "10.3.34.194",
-			"Port": 3306,
-			"Parameter": "?parseTime=true"
-	},
-	"MySQL2": {
-		"Username": "quanpv",
-		"Password": "aihBORkm7YEWOcA",
-		"Name": "news",
-		"Hostname": "192.168.23.191",
-		"Port": 3306,
-		"Parameter": "?parseTime=true"
-	},
-	"Redis": {
-		"Hostname": "10.3.34.194",
-		"Port": 6379
-	},
-	"Server": {
-		"Port": 8080
-	}
+  "MySQL": {
+    "Username": "quanpv",
+    "Password": "admin@123",
+    "Name": "recommender",
+    "Hostname": "10.3.34.194",
+    "Port": 3306,
+    "Parameter": "?parseTime=true"
+  },
+  "MySQL2": {
+    "Username": "recommender",
+    "Password": "lga5QenoQEuksNy",
+    "Name": "news",
+    "Hostname": "192.168.23.191",
+    "Port": 3306,
+    "Parameter": "?parseTime=true"
+  },
+  "Redis": {
+    "Hostname": "10.3.34.194",
+    "Port": 6379
+  },
+  "Server": {
+    "Port": 8080
+  }
 }

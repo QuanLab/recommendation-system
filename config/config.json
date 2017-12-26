@@ -1,15 +1,19 @@
 {
 	"MySQL": {
-			"Username": "alg_manager",
-			"Password": "3szs8U5wELd7X1r",
-			"Name": "alg_manager",
-			"Hostname": "192.168.23.43",
-			"Port": 3306,
-			"Parameter": "?parseTime=true"
+		"Username": "quanpv",
+		"Password": "admin@123",
+		"Name": "recommender",
+		"Hostname": "10.3.34.194",
+		"Port": 3306,
+		"Parameter": "?parseTime=true"
 	},
-	"Aerospike": {
-		"Clusters": "10.3.14.78:3000,10.3.14.80:3000,10.3.14.97:3000,10.3.14.98:3000,10.3.14.99:3000",
-		"Namespace": "memcachedata"
+	"MySQL2": {
+		"Username": "recommender",
+		"Password": "lga5QenoQEuksNy",
+		"Name": "news",
+		"Hostname": "192.168.23.191",
+		"Port": 3306,
+		"Parameter": "?parseTime=true"
 	},
 	"Redis": {
 		"Hostname": "10.3.34.194",

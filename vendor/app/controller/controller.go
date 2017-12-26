@@ -14,27 +14,19 @@ var (
 	compress = flag.Bool("compress", false, "Whether to enable transparent response compression")
 )
 
+
 func recommendHandler(ctx *fasthttp.RequestCtx) {
 	domain := string(ctx.FormValue("domain"))
 	boxidStr := string(ctx.FormValue("boxid"))
 	guid := string(ctx.FormValue("guid"))
-	item := string(ctx.FormValue("itemid"))
+	itemid := string(ctx.FormValue("itemid"))
 
 	ctx.SetContentType("application/json; charset=utf8")
-	if (domain!= "") && (boxidStr!= "") {
-		boxid, _ := strconv.Atoi(boxidStr)
-		itemid, err := strconv.ParseInt(item, 10, 64)
-		if err!=nil {
-			log.Println(err)
-			ctx.SetStatusCode(fasthttp.StatusBadRequest)
-			return
-		}
-		data := alg.GetRecommendNews(domain, boxid, guid, itemid)
-		fmt.Fprintln(ctx, data)
-		ctx.SetStatusCode(fasthttp.StatusOK)
-	} else {
-		ctx.SetStatusCode(fasthttp.StatusBadRequest)
-	}
+	boxid, _ := strconv.Atoi(boxidStr)
+
+	data := alg.GetRecommendNews(domain, boxid, guid, itemid)
+	fmt.Fprintln(ctx, data)
+	ctx.SetStatusCode(fasthttp.StatusOK)
 }
 
 func Load() {

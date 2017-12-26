@@ -5,7 +5,6 @@ import (
 	"app/shared/database/mysql"
 	"app/shared/util"
 	"encoding/json"
-	"time"
 	"log"
 	"fmt"
 )
@@ -59,14 +58,12 @@ func GetUserProfile(guid int64) (UserProfile, error) {
 }
 
 func GetUserProfileCached(guid int64) (UserProfile, error) {
-	start := time.Now()
 	var userProfile UserProfile
 	value, err := cache.Get([]byte(string(guid)))
 	if err!=nil {
-		log.Println("Not found user ", guid)
+		fmt.Println("Not found user ", guid)
 		return userProfile, err
 	}
-	fmt.Println("Found User Cache ", time.Now().Sub(start).Nanoseconds(), string(value))
 	e := json.Unmarshal(value, &userProfile)
 	if e != nil {
 		log.Println("Unable to Unmarshal user profile")
@@ -104,7 +101,6 @@ func LoadUserProfileToCache() error {
 				break
 			}
 		}
-		//log.Println(isDelete, guid, profile)
 		if isDelete {
 			DeleteUserProfile(guid)
 		}
